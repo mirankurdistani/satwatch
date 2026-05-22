@@ -19,6 +19,10 @@ SatWatch tracks all active Starlink satellites in real time, detects orbital man
 - 📊 Live Streamlit dashboard with pipeline trigger
 - 🔄 Automated 4-step pipeline: ingest → analyze → scan → report
 
+## Live Demo
+
+🌍 **[starwatch.streamlit.app](https://starwatch.streamlit.app)** — canlı dashboard, gerçek veri
+
 ## Quickstart
 
 ```bash
