@@ -1,0 +1,6 @@
+requests==2.34.2
+sgp4==2.25
+pandas==3.0.3
+python-dotenv==1.2.2
+streamlit
+plotly
