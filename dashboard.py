@@ -81,7 +81,7 @@ c5.metric("Conjunction Kaydı", f"{len(conj_log):,}")
 
 st.divider()
 
-tab1, tab2, tab3 = st.tabs(["📊 Genel Bakış", "⚠️ Conjunction Log", "🔍 Detay Ara"])
+tab1, tab2, tab3, tab4 = st.tabs(["📊 Genel Bakış", "⚠️ Conjunction Log", "🔍 Detay Ara", "🌍 3D Globe"])
 
 with tab1:
     left, right = st.columns([3, 2])
@@ -145,3 +145,22 @@ with tab3:
         filtered[["name","altitude","anomaly_score","inclination","new_epoch"]].reset_index(drop=True),
         use_container_width=True, height=400, hide_index=True
     )
+
+# ── 3D GLOBE TAB ──
+with tab4:
+    st.subheader("🌍 Gerçek Zamanlı Starlink Konumları")
+    st.caption("Turuncu = Manevra adayı | Kırmızı = Deorbit (<300km) | Mavi = Normal")
+
+    if st.button("🔄 Globe Güncelle", key="globe_btn"):
+        with st.spinner("Konumlar hesaplanıyor..."):
+            import subprocess as sp
+            sp.run(["python", "visualize_3d.py"], capture_output=True)
+            st.success("✅ Globe güncellendi!")
+
+    try:
+        with open("satwatch_globe.html", "r") as f:
+            html_content = f.read()
+        import streamlit.components.v1 as components
+        components.html(html_content, height=700, scrolling=False)
+    except FileNotFoundError:
+        st.info("Globe henüz oluşturulmamış. 'Globe Güncelle' butonuna bas.")
